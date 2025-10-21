@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Resume | Praneeth Reddy Peddareddygari</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Light Mode Palette: White (#ffffff) for background, Dark Gray (#1f2937) for text, Amber (#f59e0b) for accent. */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light Gray Background */
+            color: #1f2937; /* Dark Slate Text */
+        }
+        /* Card color for light mode */
+        .light-card {
+            background-color: #ffffff; /* White for cards/sections */
+            border-color: #e5e7eb; /* Light border */
+            color: #1f2937; /* Dark text for cards */
+        }
+        /* General content text color for light mode */
+        .content-text {
+            color: #374151; /* Medium dark gray text */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .project-card, .timeline-item, .accordion-header {
+            transition: all 0.3s ease-in-out;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #f59e0b; /* Amber */
+        }
+        .filter-btn.active {
+            background-color: #f59e0b;
+            color: #ffffff;
+        }
+        /* Custom styles for light mode compatibility */
+        .bg-gray-100-light { background-color: #f3f4f6 !important; }
+        .text-gray-700-light { color: #374151 !important; }
+        
+        /* Timeline custom color */
+        .timeline-item-content {
+            background-color: #ffffff;
+            border-color: #e5e7eb;
+            color: #1f2937;
+        }
+        .timeline-line {
+            background-color: #d1d5db; /* Light gray line */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="contact-modal" class="fixed inset-0 bg-black bg-opacity-50 z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white light-card p-8 rounded-2xl max-w-lg w-full relative shadow-2xl">
+            <button onclick="hideContactModal()" class="absolute top-4 right-4 text-gray-500 hover:text-amber-500 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h2 class="text-3xl font-bold text-amber-500 mb-6 border-b border-gray-300 pb-2">Get in Touch</h2>
+            <div class="space-y-4 content-text">
+                <p><strong><span class="text-amber-500">📧</span> Email:</strong> ppraneethreddy999@gmail.com</p>
+                <p><strong><span class="text-amber-500">📞</span> Phone:</strong> +91 6309122909</p>
+                <p><strong><span class="text-amber-500">🔗</span> LinkedIn:</strong> <a href="https://www.linkedin.com/in/electronhole-praneeth" target="_blank" class="text-sky-600 hover:underline">linkedin.com/in/electronhole-praneeth</a></p>
+                <p><strong><span class="text-amber-500">💻</span> GitHub:</strong> <a href="https://github.com/ppra81" target="_blank" class="text-sky-600 hover:underline">github.com/ppra81</a></p>
+                <p><strong><span class="text-amber-500">🥇</span> Credly:</strong> <a href="https://www.credly.com/users/peddareddygari-praneeth-reddy" target="_blank" class="text-sky-600 hover:underline">credly.com/users/peddareddygari-praneeth-reddy</a></p>
+                <p><strong><span class="text-amber-500">📚</span> DeepLearning.AI:</strong> <a href="https://learn.deeplearning.ai/my/learnings/learning-highlights/2024/01JFSCTCMHTHGTWXFG6EGD86R4?usp=sharing" target="_blank" class="text-sky-600 hover:underline">DeepLearning.AI Profile</a></p>
+            </div>
+        </div>
+    </div>
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-md border-b border-gray-200">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-amber-600">
+                Praneeth Reddy
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#skills" class="nav-link text-gray-700 font-medium">Skills</a>
+                <a href="#projects" class="nav-link text-gray-700 font-medium">Projects</a>
+                <a href="#timeline" class="nav-link text-gray-700 font-medium">Timeline</a>
+                <a href="#learning" class="nav-link text-gray-700 font-medium">Learning</a>
+            </div>
+             <button onclick="showContactModal()" class="hidden md:inline-block bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors">Contact Me</button>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+
+        <section id="hero" class="text-center mb-20">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">Praneeth Reddy Peddareddygari</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">AI & Machine Learning Engineer | Researcher | Developer</p>
+            
+            <div class="max-w-4xl mx-auto light-card p-8 rounded-2xl shadow-xl border border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 text-left">Summary & Research Focus</h2>
+                <p class="content-text text-left leading-relaxed">
+                    Dedicated and innovative towards work with a strong background in Artificial Intelligence, Machine Learning, Electronics and Data Engineering. Currently contributing to AI4Bharat at IIT Madras, focusing on developing impactful AI solutions for social good. I am interested in <strong>researching AI</strong>, <strong>building robust AI systems</strong>, and <strong>Quantum Computing</strong>. Proven track record in project management and technical execution, with a passion for continuous learning and applying technology to solve real-world problems.
+                </p>
+            </div>
+            
+            <div class="flex justify-center items-center space-x-6 mt-8">
+                <a href="https://www.linkedin.com/in/electronhole-praneeth" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">
+                    <span class="sr-only">LinkedIn</span>
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+                </a>
+                <a href="https://github.com/ppra81" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">
+                    <span class="sr-only">GitHub</span>
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"/></svg>
+                </a>
+                <a href="https://www.credly.com/users/peddareddygari-praneeth-reddy" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">
+                    <span class="sr-only">Credly</span>
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 16 16"><path d="M13.285 4.33a.654.654 0 0 0-.654.653v5.999a.654.654 0 0 0 .654.655h.653a.654.654 0 0 0 .654-.654V4.984a.654.654 0 0 0-.654-.654h-.653Z M8 1.333a6.667 6.667 0 1 0 0 13.334A6.667 6.667 0 0 0 8 1.333ZM5.385 11.667a.654.654 0 0 1-.654-.654V5.654a.654.654 0 0 1 .654-.654h.653a.654.654 0 0 1 .654.654v5.359a.654.654 0 0 1-.654.654h-.653Zm2.615-4a.654.654 0 0 1-.653-.653V4.984a.654.654 0 0 1 .653-.654h.654a.654.654 0 0 1 .654.654v2.029a.654.654 0 0 1-.654.654h-.654Z"/></svg>
+                </a>
+            </div>
+
+        </section>
+
+        <section id="skills" class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Technical Skills Dashboard</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">This dashboard provides a visual overview of my technical expertise. The chart illustrates the breadth of my skills across different domains, while the tags below specify the individual technologies and methodologies I'm proficient in. This section highlights the core competencies that fuel my project work and research.</p>
+            <div class="light-card p-6 md:p-8 rounded-2xl shadow-xl border border-gray-200">
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+                <div class="mt-12 flex flex-wrap justify-center gap-3">
+                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">Machine Learning</span>
+                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">NLP</span>
+                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">Data Engineering</span>
+                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">PyTorch</span>
+                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">TensorFlow</span>
+                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">Hugging Face</span>
+                    <span class="bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">Python</span>
+                    <span class="bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">SQL</span>
+                    <span class="bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">C</span>
+                    <span class="bg-sky-100 text-sky-800 px-4 py-2 rounded-full text-sm font-medium">PCB Design</span>
+                    <span class="bg-sky-100 text-sky-800 px-4 py-2 rounded-full text-sm font-medium">Embedded Systems</span>
+                    <span class="bg-sky-100 text-sky-800 px-4 py-2 rounded-full text-sm font-medium">LabVIEW</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Project Portfolio</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">Here is a selection of my key projects. This portfolio demonstrates the practical application of my skills in AI, data engineering, and automation. Use the filters to explore projects based on specific areas of interest and see how I approach and solve technical challenges.</p>
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <button class="filter-btn active light-card text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors border border-gray-300" data-filter="all">All</button>
+                <button class="filter-btn light-card text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors border border-gray-300" data-filter="ai-ml">AI / ML</button>
+                <button class="filter-btn light-card text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors border border-gray-300" data-filter="data-eng">Data Engineering</button>
+                <button class="filter-btn light-card text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors border border-gray-300" data-filter="hardware">Hardware / Automation</button>
+            </div>
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+        </section>
+        
+        <section id="timeline" class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Career & Education Timeline</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">This timeline outlines my professional journey and academic foundation. It highlights my progressive experience at the Indian Institute of Technology, Madras, and my foundational education in engineering, illustrating a continuous path of growth and learning in the tech field.</p>
+            <div class="relative max-w-3xl mx-auto">
+                <div class="absolute left-1/2 h-full w-1 timeline-line transform -translate-x-1/2"></div>
+                <div id="timeline-container" class="space-y-12">
+                    </div>
+            </div>
+        </section>
+
+        <section id="learning">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Learning & Development (Certifications)</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">My commitment to continuous learning is demonstrated by my extensive list of certifications and ongoing coursework from leading institutions and platforms. This section is a testament to my dedication to staying at the forefront of AI, data science, and software development. Click each heading to explore the certifications.</p>
+             <div class="max-w-3xl mx-auto space-y-4" id="accordion-container">
+             </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-gray-100 text-gray-700 mt-20 border-t border-gray-200">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p class="mb-4 text-lg font-semibold">Praneeth Reddy Peddareddygari</p>
+             <div class="flex justify-center items-center space-x-6 mb-6">
+                <a href="https://www.linkedin.com/in/electronhole-praneeth" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">LinkedIn</a>
+                <a href="https://github.com/ppra81" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">GitHub</a>
+                <a href="https://www.credly.com/users/peddareddygari-praneeth-reddy" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">Credly</a>
+                <a href="https://learn.deeplearning.ai/my/learnings/learning-highlights/2024/01JFSCTCMHTHGTWXFG6EGD86R4?usp=sharing" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">DeepLearning.AI Profile</a>
+            </div>
+            <p class="text-gray-500 text-sm">&copy; 2025. All rights reserved. Designed and built as an interactive web application.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Modal functions
+        function showContactModal() {
+            document.getElementById('contact-modal').classList.remove('hidden');
+        }
+
+        function hideContactModal() {
+            document.getElementById('contact-modal').classList.add('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // --- Skills Chart Initialization ---
+            const skillsData = {
+                labels: ['AI/ML/Data', 'Programming', 'Hardware/Other', 'Research & Soft'],
+                datasets: [{
+                    label: 'Number of Skills',
+                    data: [12, 4, 6, 4],
+                    backgroundColor: [
+                        'rgba(245, 158, 11, 0.8)', // Amber
+                        'rgba(59, 130, 246, 0.8)', // Blue
+                        'rgba(14, 165, 233, 0.8)', // Sky
+                        'rgba(107, 114, 128, 0.8)' // Gray
+                    ],
+                    borderColor: [
+                        'rgba(245, 158, 11, 1)',
+                        'rgba(59, 130, 246, 1)',
+                        'rgba(14, 165, 233, 1)',
+                        'rgba(107, 114, 128, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            const skillsChartCtx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(skillsChartCtx, {
+                type: 'bar',
+                data: skillsData,
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw} skills listed`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(209, 213, 219, 0.7)' // Light grid lines
+                            },
+                            ticks: {
+                                color: '#1f2937' // Dark ticks
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#1f2937' // Dark ticks
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- Projects Data and Rendering ---
+            const projects = [
+                { title: 'Cross-Validation-Driven Model Selection', category: 'ai-ml', description: 'Developed and compared machine learning models (Linear Regression and Random Forest) to predict power plant energy output, deploying the best model using Pickle.' },
+                { title: 'LLRestaurants Data Engineering Project', category: 'data-eng', description: 'Implemented a comprehensive database solution for a restaurant, including MySQL schema, stored procedures, Python data import, and Tableau visualizations.' },
+                { title: 'Deep Learning with PyTorch', category: 'ai-ml', description: 'Developed deep learning models for object localization and image segmentation using PyTorch, focusing on advanced computer vision tasks.' },
+                { title: 'Fine Tune BERT for Text Classification', category: 'ai-ml', description: 'Fine-tuned BERT models for text classification to detect toxic content on Quora using Hugging Face Transformers and TensorFlow.' },
+                { title: 'Automated Selenium WebDriver Gmail Interaction', category: 'hardware', description: 'Automated logging into Gmail, retrieving email counts, and saving the data to an Excel file using Selenium WebDriver and openpyxl.' },
+                { title: 'Trendy-Threads Clothing Database Project', category: 'data-eng', description: 'Designed and implemented a relational database for a clothing retailer using MySQL Workbench, including EER diagram and SQL scripts.' },
+                { title: 'Fault Detection of Assembled PCB', category: 'hardware', description: 'Developed a system for fault detection in assembled PCBs using image processing techniques in LabVIEW.' },
+            ];
+            
+            const projectsGrid = document.getElementById('projects-grid');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+
+            const renderProjects = (filter) => {
+                projectsGrid.innerHTML = '';
+                const filteredProjects = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+                
+                filteredProjects.forEach(project => {
+                    const card = document.createElement('div');
+                    card.className = 'project-card light-card p-6 rounded-2xl shadow-lg border border-gray-200';
+                    card.innerHTML = `
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">${project.title}</h3>
+                        <p class="content-text text-sm">${project.description}</p>
+                    `;
+                    projectsGrid.appendChild(card);
+                });
+            };
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    renderProjects(button.dataset.filter);
+                });
+            });
+
+            renderProjects('all');
+            
+            // --- Timeline Data and Rendering ---
+            const timelineData = [
+                { type: 'work', date: 'Feb 2023 – Present', title: 'Project Associate, AI4Bharat', institution: 'Indian Institute of Technology, Madras', description: 'Conduct research in AI and machine learning for social good initiatives and collaborate with interdisciplinary teams to develop full-stack AI solutions.'},
+                { type: 'work', date: 'Apr 2022 – Dec 2022', title: 'Project Associate, NPTEL', institution: 'IIT Madras', description: 'Supported educational content development and research initiatives across various technical domains.'},
+                { type: 'work', date: 'Dec 2021 – Apr 2022', title: 'Project Trainee, NPTEL', institution: 'IIT Madras', description: 'Assisted in research and development projects, focusing on technical implementation and process optimization.'},
+                { type: 'education', date: '2017 - 2021', title: 'Bachelor of Engineering', institution: 'Sathyabama Institute of Science & Technology, Chennai', description: 'Electrical, Electronics and Communications Engineering. Grade: 7.5 CGPA.'},
+            ];
+
+            const timelineContainer = document.getElementById('timeline-container');
+            timelineData.forEach((item, index) => {
+                const isLeft = index % 2 === 0;
+                const timelineItem = document.createElement('div');
+                timelineItem.className = `timeline-item relative flex items-center ${isLeft ? 'justify-start' : 'justify-end'}`;
+
+                timelineItem.innerHTML = `
+                    <div class="absolute left-1/2 w-4 h-4 bg-amber-500 rounded-full transform -translate-x-1/2 border-4 border-[#f3f4f6]"></div>
+                    <div class="w-[calc(50%-2rem)] timeline-item-content p-6 rounded-2xl shadow-lg border border-gray-200">
+                        <p class="text-sm font-semibold text-amber-600 mb-1">${item.date}</p>
+                        <h3 class="text-lg font-bold text-gray-800">${item.title}</h3>
+                        <p class="text-md text-gray-700 font-medium mb-2">${item.institution}</p>
+                        <p class="text-sm text-gray-600">${item.description}</p>
+                    </div>
+                `;
+                if (!isLeft) {
+                    timelineItem.querySelector('div:last-child').classList.add('text-right');
+                }
+                timelineContainer.appendChild(timelineItem);
+            });
+            
+            // --- Accordion Data and Rendering ---
+            const accordionData = [
+                { 
+                    title: 'DeepLearning.AI / Stanford / Duke (Completed Certifications)', 
+                    content: [
+                        'Meta Full Stack Developer (Meta)', 
+                        'Meta React (Meta)', 
+                        'Google Cybersecurity (Google)',
+                        'Machine Learning Specialization', 
+                        'Sequence Models', 
+                        'Improving Deep Neural Networks', 
+                        'Mathematics for Machine Learning and Data Science Specialization', 
+                        'AI For Everyone', 
+                        'AI for Good Specialization', 
+                        'Machine Learning Foundations for Product Managers', 
+                        'Malaria Parasite Detection Using Ensemble Learning in Keras'
+                    ], 
+                    open: true
+                },
+                { title: 'IBM / AWS / Meta', content: ['Generative AI: Foundation Models and Platforms', 'Generative AI: Impact, Considerations, and Ethical Issues', 'Data Storage and Queries, AWS and DeepLearning.AI', 'Advanced MySQL Topics, Meta', 'Database Structures and Management with MySQL, Meta', 'Python for Data Science, AI & Development, IBM'], open: false},
+                { title: 'NPTEL / IITs / Other', content: ['Embedded Systems Design, IIT Kharagpur', 'Problem Solving Through Programming In C, IIT Kharagpur', 'Graphical Programming using NI-LabVIEW, OPTITHOUGHT', 'CMOS Digital VLSI Design, IIT Roorkee', 'Microprocessors and Microcontrollers, IIT Kharagpur', 'Fundamentals of Electronic Device Fabrication, IIT Madras'], open: false}
+            ];
+            
+            const accordionContainer = document.getElementById('accordion-container');
+            accordionData.forEach(item => {
+                const accordionItem = document.createElement('div');
+                accordionItem.className = 'light-card rounded-2xl shadow-lg overflow-hidden border border-gray-200';
+                
+                const listItems = item.content.map(c => `<li class="content-text">${c}</li>`).join('');
+                
+                accordionItem.innerHTML = `
+                    <div class="accordion-header cursor-pointer p-6 flex justify-between items-center hover:bg-gray-50 transition-colors">
+                        <h3 class="font-bold text-lg text-gray-800">${item.title}</h3>
+                        <span class="transform transition-transform duration-300 ${item.open ? 'rotate-180' : ''}">
+                            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </span>
+                    </div>
+                    <div class="accordion-content overflow-hidden transition-all duration-500 ease-in-out ${item.open ? 'max-h-screen' : 'max-h-0'}">
+                        <ul class="px-6 pb-6 space-y-2 list-disc list-inside">
+                            ${listItems}
+                        </ul>
+                    </div>
+                `;
+
+                const header = accordionItem.querySelector('.accordion-header');
+                const content = accordionItem.querySelector('.accordion-content');
+                const icon = header.querySelector('span');
+
+                header.addEventListener('click', () => {
+                    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+                    if (isOpen) {
+                        content.style.maxHeight = '0px';
+                        icon.classList.remove('rotate-180');
+                    } else {
+                        // Reset max-height before getting scrollHeight to ensure proper height calculation
+                        content.style.maxHeight = 'none'; 
+                        const scrollHeight = content.scrollHeight;
+                        content.style.maxHeight = '0px'; 
+                        // Force a reflow
+                        void content.offsetWidth; 
+                        content.style.maxHeight = scrollHeight + 'px';
+                        icon.classList.add('rotate-180');
+                    }
+                });
+                
+                // Initial open state handling
+                if (item.open) {
+                    // Use a slight delay to ensure the scrollHeight is calculated after DOM painting
+                    setTimeout(() => {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }, 100); 
+                }
+
+
+                accordionContainer.appendChild(accordionItem);
+            });
+
+        });
+    </script>
+</body>
+</html>
