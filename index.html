@@ -10,21 +10,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Light Mode Palette: White (#ffffff) for background, Dark Gray (#1f2937) for text, Amber (#f59e0b) for accent. */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Light Gray Background */
-            color: #1f2937; /* Dark Slate Text */
+            background-color: #f3f4f6;
+            color: #1f2937;
         }
-        /* Card color for light mode */
         .light-card {
-            background-color: #ffffff; /* White for cards/sections */
-            border-color: #e5e7eb; /* Light border */
-            color: #1f2937; /* Dark text for cards */
+            background-color: #ffffff;
+            border-color: #e5e7eb;
+            color: #1f2937;
         }
-        /* General content text color for light mode */
         .content-text {
-            color: #374151; /* Medium dark gray text */
+            color: #374151;
         }
         .chart-container {
             position: relative;
@@ -33,12 +30,10 @@
             margin-left: auto;
             margin-right: auto;
             height: 300px;
-            max-height: 350px;
         }
         @media (min-width: 768px) {
             .chart-container {
                 height: 350px;
-                max-height: 400px;
             }
         }
         .project-card, .timeline-item, .accordion-header {
@@ -52,24 +47,36 @@
             transition: color 0.3s;
         }
         .nav-link:hover {
-            color: #f59e0b; /* Amber */
+            color: #f59e0b;
         }
         .filter-btn.active {
             background-color: #f59e0b;
             color: #ffffff;
         }
-        /* Custom styles for light mode compatibility */
         .bg-gray-100-light { background-color: #f3f4f6 !important; }
         .text-gray-700-light { color: #374151 !important; }
         
-        /* Timeline custom color */
-        .timeline-item-content {
-            background-color: #ffffff;
-            border-color: #e5e7eb;
-            color: #1f2937;
-        }
+        /* Timeline styling for mobile */
         .timeline-line {
-            background-color: #d1d5db; /* Light gray line */
+            background-color: #d1d5db;
+        }
+        @media (max-width: 767px) {
+            .timeline-line {
+                left: 20px !important;
+                transform: none !important;
+            }
+            .timeline-dot {
+                left: 20px !important;
+                transform: translateX(-50%) !important;
+            }
+            .timeline-item-content {
+                width: calc(100% - 50px) !important;
+                margin-left: 50px !important;
+                text-align: left !important;
+            }
+            .timeline-item {
+                justify-content: flex-start !important;
+            }
         }
     </style>
 </head>
@@ -81,103 +88,99 @@
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <h2 class="text-3xl font-bold text-amber-500 mb-6 border-b border-gray-300 pb-2">Get in Touch</h2>
-            <div class="space-y-4 content-text">
-                <p><strong><span class="text-amber-500"></span> Email:</strong> ppraneethreddy999@gmail.com</p>
-                <p><strong><span class="text-amber-500"></span> Phone:</strong> +91 6309122909</p>
-                <p><strong><span class="text-amber-500"></span> LinkedIn:</strong> <a href="https://www.linkedin.com/in/electronhole-praneeth" target="_blank" class="text-sky-600 hover:underline">linkedin.com/in/electronhole-praneeth</a></p>
-                <p><strong><span class="text-amber-500"></span> GitHub:</strong> <a href="https://github.com/ppra81" target="_blank" class="text-sky-600 hover:underline">github.com/ppra81</a></p>
-                <p><strong><span class="text-amber-500"></span> Credly:</strong> <a href="https://www.credly.com/users/peddareddygari-praneeth-reddy" target="_blank" class="text-sky-600 hover:underline">credly.com/users/peddareddygari-praneeth-reddy</a></p>
-                <p><strong><span class="text-amber-500"></span> DeepLearning.AI:</strong> <a href="https://learn.deeplearning.ai/my/learnings/learning-highlights/2024/01JFSCTCMHTHGTWXFG6EGD86R4?usp=sharing" target="_blank" class="text-sky-600 hover:underline">DeepLearning.AI Profile</a></p>
+            <div class="space-y-4 content-text text-sm sm:text-base">
+                <p><strong>Email:</strong> ppraneethreddy999@gmail.com</p>
+                <p><strong>Phone:</strong> +91 6309122909</p>
+                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/electronhole-praneeth" target="_blank" class="text-sky-600 hover:underline">Profile</a></p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/ppra81" target="_blank" class="text-sky-600 hover:underline">github.com/ppra81</a></p>
+                <p><strong>Credly:</strong> <a href="https://www.credly.com/users/peddareddygari-praneeth-reddy" target="_blank" class="text-sky-600 hover:underline">Badges</a></p>
             </div>
         </div>
     </div>
 
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-md border-b border-gray-200">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-amber-600">
+            <div class="text-xl md:text-2xl font-bold text-amber-600">
                 Praneeth Reddy
             </div>
+            
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#skills" class="nav-link text-gray-700 font-medium">Skills</a>
                 <a href="#projects" class="nav-link text-gray-700 font-medium">Projects</a>
                 <a href="#timeline" class="nav-link text-gray-700 font-medium">Timeline</a>
                 <a href="#learning" class="nav-link text-gray-700 font-medium">Learning</a>
+                <button onclick="showContactModal()" class="bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors">Contact Me</button>
             </div>
-            <button onclick="showContactModal()" class="hidden md:inline-block bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors">Contact Me</button>
+
+            <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
         </nav>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 px-6 py-4 space-y-4 shadow-inner">
+            <a href="#skills" class="block nav-link text-gray-700 font-medium" onclick="toggleMobileMenu()">Skills</a>
+            <a href="#projects" class="block nav-link text-gray-700 font-medium" onclick="toggleMobileMenu()">Projects</a>
+            <a href="#timeline" class="block nav-link text-gray-700 font-medium" onclick="toggleMobileMenu()">Timeline</a>
+            <a href="#learning" class="block nav-link text-gray-700 font-medium" onclick="toggleMobileMenu()">Learning</a>
+            <button onclick="showContactModal(); toggleMobileMenu()" class="w-full bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg">Contact Me</button>
+        </div>
     </header>
 
     <main class="container mx-auto px-6 py-12 md:py-20">
 
         <section id="hero" class="text-center mb-20">
-            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">Praneeth Reddy Peddareddygari</h1>
+            <h1 class="text-3xl md:text-6xl font-bold text-gray-800 mb-4">Praneeth Reddy Peddareddygari</h1>
             <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">AI & Machine Learning Engineer | Researcher | App Developer</p>
             
-            <div class="max-w-4xl mx-auto light-card p-8 rounded-2xl shadow-xl border border-gray-200">
+            <div class="max-w-4xl mx-auto light-card p-6 md:p-8 rounded-2xl shadow-xl border border-gray-200">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4 text-left">Summary & Research Focus</h2>
                 <p class="content-text text-left leading-relaxed">
-                    Dedicated and innovative professional with a strong background in Artificial Intelligence, Machine Learning, and <strong>End-to-End Application Engineering</strong>. I build applications from user-facing interfaces to the system layers underneath, including modular architecture, encrypted storage, and AI-powered workflows. Currently contributing to AI4Bharat at IIT Madras, I am interested in <strong>researching AI</strong>, <strong>building robust production systems</strong>, and <strong>Quantum Computing</strong>.
+                    Dedicated and innovative professional with a strong background in Artificial Intelligence, Machine Learning, and <strong>End-to-End Application Engineering</strong>. I build applications from user-facing interfaces to system layers, including modular architecture, encrypted storage, and AI-powered workflows. Currently contributing to AI4Bharat at IIT Madras.
                 </p>
             </div>
             
             <div class="flex justify-center items-center space-x-6 mt-8">
                 <a href="https://www.linkedin.com/in/electronhole-praneeth" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">
-                    <span class="sr-only">LinkedIn</span>
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </a>
                 <a href="https://github.com/ppra81" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">
-                    <span class="sr-only">GitHub</span>
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"/></svg>
-                </a>
-                <a href="https://www.credly.com/users/peddareddygari-praneeth-reddy" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">
-                    <span class="sr-only">Credly</span>
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 16 16"><path d="M13.285 4.33a.654.654 0 0 0-.654.653v5.999a.654.654 0 0 0 .654.655h.653a.654.654 0 0 0 .654-.654V4.984a.654.654 0 0 0-.654-.654h-.653Z M8 1.333a6.667 6.667 0 1 0 0 13.334A6.667 6.667 0 0 0 8 1.333ZM5.385 11.667a.654.654 0 0 1-.654-.654V5.654a.654.654 0 0 1 .654-.654h.653a.654.654 0 0 1 .654.654v5.359a.654.654 0 0 1-.654.654h-.653Zm2.615-4a.654.654 0 0 1-.653-.653V4.984a.654.654 0 0 1 .653-.654h.654a.654.654 0 0 1 .654.654v2.029a.654.654 0 0 1-.654.654h-.654Z"/></svg>
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
                 </a>
             </div>
-
         </section>
 
         <section id="skills" class="mb-20">
             <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Technical Skills Dashboard</h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">This dashboard provides a visual overview of my technical expertise. The chart illustrates the breadth of my skills across different domains, while the tags below specify the individual technologies and methodologies I'm proficient in.</p>
-            <div class="light-card p-6 md:p-8 rounded-2xl shadow-xl border border-gray-200">
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12 px-4 text-sm md:text-base">An overview of my technical expertise across AI/ML, System Design, and Hardware.</p>
+            <div class="light-card p-4 md:p-8 rounded-2xl shadow-xl border border-gray-200">
                 <div class="chart-container">
                     <canvas id="skillsChart"></canvas>
                 </div>
-                <div class="mt-12 flex flex-wrap justify-center gap-3">
-                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">Machine Learning</span>
-                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">NLP</span>
-                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">Data Engineering</span>
-                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">System Design</span>
-                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">PyTorch</span>
-                    <span class="bg-gray-100-light text-gray-700-light px-4 py-2 rounded-full text-sm font-medium">TensorFlow</span>
-                    <span class="bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">Kotlin & Jetpack Compose</span>
-                    <span class="bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">Python</span>
-                    <span class="bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">SQL / Room</span>
-                    <span class="bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">Go (Backend)</span>
-                    <span class="bg-sky-100 text-sky-800 px-4 py-2 rounded-full text-sm font-medium">E2EE Encryption</span>
-                    <span class="bg-sky-100 text-sky-800 px-4 py-2 rounded-full text-sm font-medium">PCB Design</span>
-                    <span class="bg-sky-100 text-sky-800 px-4 py-2 rounded-full text-sm font-medium">Embedded Systems</span>
-                    <span class="bg-sky-100 text-sky-800 px-4 py-2 rounded-full text-sm font-medium">LabVIEW</span>
+                <div class="mt-8 flex flex-wrap justify-center gap-2 md:gap-3">
+                    <span class="bg-amber-100 text-amber-800 px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:sm font-medium">Machine Learning</span>
+                    <span class="bg-amber-100 text-amber-800 px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:sm font-medium">NLP</span>
+                    <span class="bg-amber-100 text-amber-800 px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:sm font-medium">PyTorch</span>
+                    <span class="bg-sky-100 text-sky-800 px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:sm font-medium">Kotlin & Compose</span>
+                    <span class="bg-sky-100 text-sky-800 px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:sm font-medium">Go</span>
+                    <span class="bg-sky-100 text-sky-800 px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:sm font-medium">E2EE Encryption</span>
                 </div>
             </div>
         </section>
 
         <section id="projects" class="mb-20">
             <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Project Portfolio</h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">Here is a selection of my key projects demonstrating practical application in AI, App Engineering, and System Design.</p>
-            <div class="flex flex-wrap justify-center gap-3 mb-8">
-                <button class="filter-btn active light-card text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors border border-gray-300" data-filter="all">All</button>
-                <button class="filter-btn light-card text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors border border-gray-300" data-filter="app-sys">App & System Design</button>
-                <button class="filter-btn light-card text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors border border-gray-300" data-filter="ai-ml">AI / ML</button>
-                <button class="filter-btn light-card text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors border border-gray-300" data-filter="data-eng">Data Engineering</button>
-                <button class="filter-btn light-card text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors border border-gray-300" data-filter="hardware">Hardware</button>
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button class="filter-btn active light-card text-xs md:text-sm font-semibold px-3 py-1.5 md:px-4 md:py-2 rounded-lg border border-gray-300" data-filter="all">All</button>
+                <button class="filter-btn light-card text-xs md:text-sm font-semibold px-3 py-1.5 md:px-4 md:py-2 rounded-lg border border-gray-300" data-filter="app-sys">Systems</button>
+                <button class="filter-btn light-card text-xs md:text-sm font-semibold px-3 py-1.5 md:px-4 md:py-2 rounded-lg border border-gray-300" data-filter="ai-ml">AI / ML</button>
+                <button class="filter-btn light-card text-xs md:text-sm font-semibold px-3 py-1.5 md:px-4 md:py-2 rounded-lg border border-gray-300" data-filter="data-eng">Data</button>
+                <button class="filter-btn light-card text-xs md:text-sm font-semibold px-3 py-1.5 md:px-4 md:py-2 rounded-lg border border-gray-300" data-filter="hardware">Hardware</button>
             </div>
-            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
         </section>
         
         <section id="timeline" class="mb-20">
-            <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Career & Education Timeline</h2>
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Timeline</h2>
             <div class="relative max-w-3xl mx-auto">
                 <div class="absolute left-1/2 h-full w-1 timeline-line transform -translate-x-1/2"></div>
                 <div id="timeline-container" class="space-y-12"></div>
@@ -185,8 +188,8 @@
         </section>
 
         <section id="learning">
-            <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Learning & Development (Certifications)</h2>
-             <div class="max-w-3xl mx-auto space-y-4" id="accordion-container"></div>
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Certifications</h2>
+            <div class="max-w-3xl mx-auto space-y-4" id="accordion-container"></div>
         </section>
 
     </main>
@@ -194,38 +197,42 @@
     <footer class="bg-gray-100 text-gray-700 mt-20 border-t border-gray-200">
         <div class="container mx-auto px-6 py-8 text-center">
             <p class="mb-4 text-lg font-semibold">Praneeth Reddy Peddareddygari</p>
-             <div class="flex justify-center items-center space-x-6 mb-6">
-                <a href="https://www.linkedin.com/in/electronhole-praneeth" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">LinkedIn</a>
-                <a href="https://github.com/ppra81" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">GitHub</a>
-                <a href="https://www.credly.com/users/peddareddygari-praneeth-reddy" target="_blank" class="text-gray-500 hover:text-amber-500 transition-colors">Credly</a>
-            </div>
-            <p class="text-gray-500 text-sm">&copy; 2025. All rights reserved. Designed and built as an interactive web application.</p>
+            <p class="text-gray-500 text-xs md:text-sm">&copy; 2026. All rights reserved. Built as a responsive interactive web application.</p>
         </div>
     </footer>
 
     <script>
+        // --- Mobile Menu Toggle Logic ---
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        function toggleMobileMenu() {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // Change to X
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); // Change to Hamburger
+            }
+        }
+        menuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Modal Logic
         function showContactModal() { document.getElementById('contact-modal').classList.remove('hidden'); }
         function hideContactModal() { document.getElementById('contact-modal').classList.add('hidden'); }
 
         document.addEventListener('DOMContentLoaded', function () {
             
-            // --- Skills Chart Initialization ---
+            // --- Skills Chart ---
             const skillsData = {
-                labels: ['AI/ML/Data', 'App & System Design', 'Programming', 'Hardware/Other', 'Research & Soft'],
+                labels: ['AI/ML/Data', 'App & System Design', 'Programming', 'Hardware', 'Research'],
                 datasets: [{
-                    label: 'Number of Skills',
                     data: [12, 10, 7, 6, 4],
-                    backgroundColor: [
-                        'rgba(245, 158, 11, 0.8)', // Amber
-                        'rgba(16, 185, 129, 0.8)', // Emerald
-                        'rgba(59, 130, 246, 0.8)', // Blue
-                        'rgba(14, 165, 233, 0.8)', // Sky
-                        'rgba(107, 114, 128, 0.8)' // Gray
-                    ],
-                    borderColor: [
-                        'rgba(245, 158, 11, 1)', 'rgba(16, 185, 129, 1)', 'rgba(59, 130, 246, 1)', 'rgba(14, 165, 233, 1)', 'rgba(107, 114, 128, 1)'
-                    ],
-                    borderWidth: 1
+                    backgroundColor: ['rgba(245, 158, 11, 0.8)', 'rgba(16, 185, 129, 0.8)', 'rgba(59, 130, 246, 0.8)', 'rgba(14, 165, 233, 0.8)', 'rgba(107, 114, 128, 0.8)'],
+                    borderWidth: 0,
+                    borderRadius: 5
                 }]
             };
 
@@ -239,22 +246,21 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        x: { beginAtZero: true, grid: { color: 'rgba(209, 213, 219, 0.7)' }, ticks: { color: '#1f2937' } },
-                        y: { grid: { display: false }, ticks: { color: '#1f2937' } }
+                        x: { beginAtZero: true, grid: { color: 'rgba(209, 213, 219, 0.3)' } },
+                        y: { grid: { display: false } }
                     }
                 }
             });
 
-            // --- Projects Data (With E2EE Events App Integrated) ---
+            // --- Projects Data ---
             const projects = [
-                { title: 'E2EE Events App', category: 'app-sys', description: 'End-to-end encrypted Android application for secure event capture. Features modular architecture, AES-GCM local vaults, cloud sync orchestration, and AI features (OCR, TTS, Speech Processing).' },
-                { title: 'Cross-Validation-Driven Model Selection', category: 'ai-ml', description: 'Developed and compared machine learning models (Linear Regression and Random Forest) to predict power plant energy output, deploying the best model using Pickle.' },
-                { title: 'LLRestaurants Data Engineering Project', category: 'data-eng', description: 'Implemented a comprehensive database solution for a restaurant, including MySQL schema, stored procedures, Python data import, and Tableau visualizations.' },
-                { title: 'Deep Learning with PyTorch', category: 'ai-ml', description: 'Developed deep learning models for object localization and image segmentation using PyTorch, focusing on advanced computer vision tasks.' },
-                { title: 'Fine Tune BERT for Text Classification', category: 'ai-ml', description: 'Fine-tuned BERT models for text classification to detect toxic content on Quora using Hugging Face Transformers and TensorFlow.' },
-                { title: 'Automated Selenium WebDriver Gmail Interaction', category: 'hardware', description: 'Automated logging into Gmail, retrieving email counts, and saving the data to an Excel file using Selenium WebDriver and openpyxl.' },
-                { title: 'Trendy-Threads Clothing Database Project', category: 'data-eng', description: 'Designed and implemented a relational database for a clothing retailer using MySQL Workbench, including EER diagram and SQL scripts.' },
-                { title: 'Fault Detection of Assembled PCB', category: 'hardware', description: 'Developed a system for fault detection in assembled PCBs using image processing techniques in LabVIEW.' },
+                { title: 'E2EE Events App', category: 'app-sys', description: 'End-to-end encrypted Android application for secure event capture. Features modular architecture, AES-GCM local vaults, and AI features.' },
+                { title: 'Linear vs Random Forest', category: 'ai-ml', description: 'Compared ML models to predict power plant energy output, deploying via Pickle.' },
+                { title: 'LLRestaurants Data Eng', category: 'data-eng', description: 'Database solution with MySQL schema, Python data import, and Tableau visualizations.' },
+                { title: 'Deep Learning PyTorch', category: 'ai-ml', description: 'Models for object localization and image segmentation.' },
+                { title: 'BERT Text Classification', category: 'ai-ml', description: 'Fine-tuned BERT for toxic content detection using Hugging Face and TensorFlow.' },
+                { title: 'Automated Selenium Tool', category: 'hardware', description: 'Automated Gmail interactions and data logging using Selenium and Openpyxl.' },
+                { title: 'PCB Fault Detection', category: 'hardware', description: 'Fault detection in assembled PCBs using image processing in LabVIEW.' },
             ];
             
             const projectsGrid = document.getElementById('projects-grid');
@@ -262,8 +268,8 @@
 
             const renderProjects = (filter) => {
                 projectsGrid.innerHTML = '';
-                const filteredProjects = filter === 'all' ? projects : projects.filter(p => p.category === filter);
-                filteredProjects.forEach(project => {
+                const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+                filtered.forEach(project => {
                     const card = document.createElement('div');
                     card.className = 'project-card light-card p-6 rounded-2xl shadow-lg border border-gray-200';
                     card.innerHTML = `<h3 class="font-bold text-lg text-gray-800 mb-2">${project.title}</h3><p class="content-text text-sm">${project.description}</p>`;
@@ -278,15 +284,13 @@
                     renderProjects(button.dataset.filter);
                 });
             });
-
             renderProjects('all');
             
-            // --- Timeline Rendering ---
+            // --- Timeline ---
             const timelineData = [
-                { type: 'work', date: 'Feb 2023 – Present', title: 'Project Associate, AI4Bharat', institution: 'Indian Institute of Technology, Madras', description: 'Conduct research in AI and machine learning for social good initiatives and collaborate with interdisciplinary teams to develop full-stack AI solutions.'},
-                { type: 'work', date: 'Apr 2022 – Dec 2022', title: 'Project Associate, NPTEL', institution: 'IIT Madras', description: 'Supported educational content development and research initiatives across various technical domains.'},
-                { type: 'work', date: 'Dec 2021 – Apr 2022', title: 'Project Trainee, NPTEL', institution: 'IIT Madras', description: 'Assisted in research and development projects, focusing on technical implementation and process optimization.'},
-                { type: 'education', date: '2017 - 2021', title: 'Bachelor of Engineering', institution: 'Sathyabama Institute of Science & Technology, Chennai', description: 'Electrical, Electronics and Communications Engineering. Grade: 7.5 CGPA.'},
+                { date: 'Feb 2023 – Present', title: 'Project Associate, AI4Bharat', institution: 'IIT Madras', description: 'Research in AI/ML for social good and full-stack AI development.'},
+                { date: 'Apr 2022 – Dec 2022', title: 'Project Associate, NPTEL', institution: 'IIT Madras', description: 'Educational content development and technical research.'},
+                { date: '2017 - 2021', title: 'Bachelor of Engineering', institution: 'Sathyabama Institute, Chennai', description: 'ECE Branch. Grade: 7.5 CGPA.'},
             ];
 
             const timelineContainer = document.getElementById('timeline-container');
@@ -295,58 +299,49 @@
                 const timelineItem = document.createElement('div');
                 timelineItem.className = `timeline-item relative flex items-center ${isLeft ? 'justify-start' : 'justify-end'}`;
                 timelineItem.innerHTML = `
-                    <div class="absolute left-1/2 w-4 h-4 bg-amber-500 rounded-full transform -translate-x-1/2 border-4 border-[#f3f4f6]"></div>
-                    <div class="w-[calc(50%-2rem)] timeline-item-content p-6 rounded-2xl shadow-lg border border-gray-200">
-                        <p class="text-sm font-semibold text-amber-600 mb-1">${item.date}</p>
-                        <h3 class="text-lg font-bold text-gray-800">${item.title}</h3>
-                        <p class="text-md text-gray-700 font-medium mb-2">${item.institution}</p>
-                        <p class="text-sm text-gray-600">${item.description}</p>
+                    <div class="timeline-dot absolute left-1/2 w-4 h-4 bg-amber-500 rounded-full transform -translate-x-1/2 border-4 border-[#f3f4f6] z-10"></div>
+                    <div class="timeline-item-content w-[calc(50%-2rem)] p-6 rounded-2xl shadow-lg border border-gray-200 light-card">
+                        <p class="text-xs font-semibold text-amber-600 mb-1">${item.date}</p>
+                        <h3 class="text-base md:text-lg font-bold text-gray-800">${item.title}</h3>
+                        <p class="text-sm text-gray-700 font-medium mb-2">${item.institution}</p>
+                        <p class="text-xs text-gray-600">${item.description}</p>
                     </div>`;
-                if (!isLeft) timelineItem.querySelector('div:last-child').classList.add('text-right');
+                if (!isLeft) timelineItem.querySelector('.timeline-item-content').classList.add('md:text-right');
                 timelineContainer.appendChild(timelineItem);
             });
             
-            // --- Accordion Rendering ---
+            // --- Accordion (Certifications) ---
             const accordionData = [
-                { title: 'DeepLearning.AI / Stanford / Duke (Completed Certifications)', content: ['Meta Full Stack Developer (Meta)', 'Meta React (Meta)', 'Google Cybersecurity (Google)', 'Machine Learning Specialization', 'Sequence Models', 'Improving Deep Neural Networks', 'Mathematics for Machine Learning and Data Science Specialization', 'AI For Everyone', 'AI for Good Specialization', 'Machine Learning Foundations for Product Managers'], open: true },
-                { title: 'IBM / AWS / Meta', content: ['Generative AI: Foundation Models and Platforms', 'Generative AI: Impact, Considerations, and Ethical Issues', 'Data Storage and Queries, AWS and DeepLearning.AI', 'Advanced MySQL Topics, Meta', 'Database Structures and Management with MySQL, Meta', 'Python for Data Science, AI & Development, IBM'], open: false},
-                { title: 'NPTEL / IITs / Other', content: ['Embedded Systems Design, IIT Kharagpur', 'Problem Solving Through Programming In C, IIT Kharagpur', 'Graphical Programming using NI-LabVIEW, OPTITHOUGHT', 'CMOS Digital VLSI Design, IIT Roorkee', 'Microprocessors and Microcontrollers, IIT Kharagpur'], open: false}
+                { title: 'DeepLearning.AI / Stanford / Duke', content: ['Meta Full Stack Developer', 'Meta React Specialization', 'Google Cybersecurity', 'Machine Learning Specialization', 'Mathematics for ML & Data Science', 'AI for Good'], open: true },
+                { title: 'IBM / AWS / Meta', content: ['Generative AI: Foundation Models', 'AWS Data Storage and Queries', 'Advanced MySQL Topics (Meta)', 'Python for Data Science (IBM)'], open: false},
+                { title: 'NPTEL / IITs', content: ['Embedded Systems Design (IITK)', 'Programming In C (IITK)', 'CMOS Digital VLSI (IITR)', 'Microprocessors (IITK)'], open: false}
             ];
             
             const accordionContainer = document.getElementById('accordion-container');
             accordionData.forEach(item => {
-                const accordionItem = document.createElement('div');
-                accordionItem.className = 'light-card rounded-2xl shadow-lg overflow-hidden border border-gray-200';
-                const listItems = item.content.map(c => `<li class="content-text">${c}</li>`).join('');
-                accordionItem.innerHTML = `
-                    <div class="accordion-header cursor-pointer p-6 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                        <h3 class="font-bold text-lg text-gray-800">${item.title}</h3>
-                        <span class="transform transition-transform duration-300 ${item.open ? 'rotate-180' : ''}">
-                            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                const accItem = document.createElement('div');
+                accItem.className = 'light-card rounded-2xl shadow-lg overflow-hidden border border-gray-200';
+                accItem.innerHTML = `
+                    <div class="accordion-header cursor-pointer p-5 flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="font-bold text-sm md:text-base text-gray-800">${item.title}</h3>
+                        <span class="transform transition-transform ${item.open ? 'rotate-180' : ''}">
+                            <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </span>
                     </div>
-                    <div class="accordion-content overflow-hidden transition-all duration-500 ease-in-out ${item.open ? 'max-h-screen' : 'max-h-0'}">
-                        <ul class="px-6 pb-6 space-y-2 list-disc list-inside">${listItems}</ul>
+                    <div class="accordion-content overflow-hidden transition-all duration-300" style="max-height: ${item.open ? '500px' : '0px'}">
+                        <ul class="px-6 pb-6 space-y-2 list-disc list-inside text-xs md:text-sm content-text">${item.content.map(c => `<li>${c}</li>`).join('')}</ul>
                     </div>`;
 
-                const header = accordionItem.querySelector('.accordion-header');
-                const content = accordionItem.querySelector('.accordion-content');
-                const icon = header.querySelector('span');
-
-                header.addEventListener('click', () => {
-                    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
-                    if (isOpen) {
-                        content.style.maxHeight = '0px';
-                        icon.classList.remove('rotate-180');
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                        icon.classList.add('rotate-180');
-                    }
+                accItem.querySelector('.accordion-header').addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('span');
+                    const isOpen = content.style.maxHeight !== '0px';
+                    content.style.maxHeight = isOpen ? '0px' : content.scrollHeight + 'px';
+                    icon.classList.toggle('rotate-180', !isOpen);
                 });
-                accordionContainer.appendChild(accordionItem);
+                accordionContainer.appendChild(accItem);
             });
         });
     </script>
 </body>
 </html>
-```
